@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		034C4F2B2484526200B4E4EF /* JKAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034C4F2A2484526200B4E4EF /* JKAudioPlayer.swift */; };
+		034C4F2D2488E1FE00B4E4EF /* bgm2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 034C4F2C2488E1FD00B4E4EF /* bgm2.mp3 */; };
 		03A46E6D247CD943004C4E56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A46E6C247CD943004C4E56 /* AppDelegate.swift */; };
 		03A46E6F247CD943004C4E56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A46E6E247CD943004C4E56 /* SceneDelegate.swift */; };
 		03A46E71247CD943004C4E56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A46E70247CD943004C4E56 /* ViewController.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		034C4F2A2484526200B4E4EF /* JKAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JKAudioPlayer.swift; sourceTree = "<group>"; };
+		034C4F2C2488E1FD00B4E4EF /* bgm2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgm2.mp3; sourceTree = "<group>"; };
 		03A46E69247CD943004C4E56 /* FlappyBird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlappyBird.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03A46E6C247CD943004C4E56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03A46E6E247CD943004C4E56 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +48,7 @@
 			children = (
 				03A46E6B247CD943004C4E56 /* FlappyBird */,
 				03A46E6A247CD943004C4E56 /* Products */,
+				034C4F2C2488E1FD00B4E4EF /* bgm2.mp3 */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,6 +71,7 @@
 				03A46E75247CD96A004C4E56 /* Assets.xcassets */,
 				03A46E77247CD96A004C4E56 /* LaunchScreen.storyboard */,
 				03A46E7A247CD96A004C4E56 /* Info.plist */,
+				034C4F2A2484526200B4E4EF /* JKAudioPlayer.swift */,
 			);
 			path = FlappyBird;
 			sourceTree = "<group>";
@@ -130,6 +136,7 @@
 			files = (
 				03A46E79247CD96A004C4E56 /* LaunchScreen.storyboard in Resources */,
 				03A46E76247CD96A004C4E56 /* Assets.xcassets in Resources */,
+				034C4F2D2488E1FE00B4E4EF /* bgm2.mp3 in Resources */,
 				03A46E74247CD944004C4E56 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,6 +150,7 @@
 			files = (
 				03A46E71247CD943004C4E56 /* ViewController.swift in Sources */,
 				03A46E6D247CD943004C4E56 /* AppDelegate.swift in Sources */,
+				034C4F2B2484526200B4E4EF /* JKAudioPlayer.swift in Sources */,
 				03A46E81247CE3AB004C4E56 /* GameScene.swift in Sources */,
 				03A46E6F247CD943004C4E56 /* SceneDelegate.swift in Sources */,
 			);

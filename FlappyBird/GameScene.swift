@@ -1,6 +1,13 @@
 
 import SpriteKit
 
+import AVKit
+
+import AVFoundation
+
+
+
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
 
@@ -27,6 +34,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var bestScoreLabelNode:SKLabelNode!
     var scoreItemLabelNode:SKLabelNode!
     var bestItemScoreLabelNode:SKLabelNode!
+    
+    
+    var soundPlayer: AVAudioPlayer!
+    
+    var musicPlayer: AVAudioPlayer!
+
+
+    
+ 
+    
+    
     
     
     
@@ -320,7 +338,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let createWallAnimation = SKAction.run({
             // 壁関連のノードを乗せるノードを作成
             let wall = SKNode()
-            wall.position = CGPoint(x: self.frame.size.width + itemTextureA.size().width / 2, y: 0)
             wall.zPosition = -50 // 雲より手前、地面より奥
 
             // 0〜random_y_rangeまでのランダム値を生成
@@ -332,27 +349,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //            under.position = CGPoint(x: 0, y: under_wall_y + 3)
             under.position = CGPoint(x: 0, y: under_wall_y)
 
+            wall.position = CGPoint(x: self.frame.size.width + itemTextureA.size().width / 2, y: under_wall_y)
             
+
+            
+            
+
 //            under.physicsBody?.categoryBitMask = self.itemCategory    // ←追加
+            
+
+            
+
+
+            
+            
+//            let scoreNode = SKNode()
+//            wall.position =  CGPoint(x: 0 , y: under_wall_y )
+            under.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: itemTextureA.size().width, height: itemTextureA.size().height))
+            
+//            scoreNode.position = CGPoint(x: under.size.width + birdSize.width / 2 , y: self.frame.height / 2)
+//            scoreNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: under.size.width, height: self.frame.size.height))
+            under.physicsBody?.isDynamic = false
+            under.physicsBody?.categoryBitMask = self.itemCategory
+            under.physicsBody?.contactTestBitMask = self.birdCategory
             
             wall.addChild(under)
 
             
-
-
             
-            
-            let scoreNode = SKNode()
-            scoreNode.position =  CGPoint(x: 0 , y: under_wall_y )
-            scoreNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: itemTextureA.size().width, height: itemTextureA.size().height))
-            
-//            scoreNode.position = CGPoint(x: under.size.width + birdSize.width / 2 , y: self.frame.height / 2)
-//            scoreNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: under.size.width, height: self.frame.size.height))
-            scoreNode.physicsBody?.isDynamic = false
-            scoreNode.physicsBody?.categoryBitMask = self.itemCategory
-            scoreNode.physicsBody?.contactTestBitMask = self.birdCategory
 
-            wall.addChild(scoreNode)
 
 
 
@@ -419,19 +444,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
                 
             }else if(contact.bodyA.categoryBitMask & itemCategory) == itemCategory ||
-                (contact.bodyB.categoryBitMask & itemCategory) == itemCategory {
-                
+              (contact.bodyB.categoryBitMask & itemCategory) == itemCategory {
                 var firstBody, secondBody: SKPhysicsBody
-                
-                firstBody = contact.bodyA
-                secondBody = contact.bodyB
+
+
 
 
                 print("ItemScoreUp")
+                
+                
                 ItemScore += 1
                 scoreItemLabelNode.text = "Item Score:\(ItemScore)"
+                
+                
 
-                firstBody.node.removeFromParent()
+                
+                //音楽ファイルをbackmusic.mp3とした場合
+
+                
+//                if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+//                    firstBody = contact.bodyA
+//                    secondBody = contact.bodyB
+//                } else {
+//                    firstBody = contact.bodyB
+//                    secondBody = contact.bodyA
+//                }
+                
+                
+                if (contact.bodyA.categoryBitMask & itemCategory) == itemCategory {
+                    contact.bodyA.node?.removeFromParent()
+                }
+                if (contact.bodyB.categoryBitMask & itemCategory) == itemCategory {
+                    contact.bodyB.node?.removeFromParent()
+
+                    
+                }
+    
 
 
 
@@ -445,11 +493,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     userDefaults.synchronize()
                     
                     
+                    
 
 
             }
 
+
             
+            //音楽ファイルをbackmusic.mp3とした場合
+            let music = SKAction.playSoundFileNamed("bgm2.mp3",waitForCompletion: true)
+//                let repeatMusic = SKAction.repeat(music, count: 10000)
+                self.run(music)
                 
             
             
@@ -553,6 +607,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(bestItemScoreLabelNode)
         
         
+    }
+    
+    
+    open func playSoundEffect(named fileName: String) {
+         if let url = Bundle.main.url(forResource: fileName, withExtension: "") {
+             soundPlayer = try? AVAudioPlayer(contentsOf: url)
+             soundPlayer.stop()
+             soundPlayer.numberOfLoops = 0
+             soundPlayer.prepareToPlay()
+             soundPlayer.play()
+         }
+     }
+    
+    
+    open func playMusic(_ fileName: String, withExtension type: String = "") {
+        if let url = Bundle.main.url(forResource: fileName, withExtension: type) {
+            musicPlayer = try? AVAudioPlayer(contentsOf: url)
+            musicPlayer.numberOfLoops = -1
+            musicPlayer.prepareToPlay()
+            musicPlayer.play()
+        }
     }
     
 }
