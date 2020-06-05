@@ -226,6 +226,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             
             under.physicsBody = SKPhysicsBody(rectangleOf: wallTexture.size())
+            under.physicsBody?.categoryBitMask = self.wallCategory    // ←追加
+
             
             under.physicsBody?.isDynamic = false
             
@@ -237,6 +239,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             upper.position = CGPoint(x: 0, y: under_wall_y + wallTexture.size().height + slit_length)
             
             upper.physicsBody = SKPhysicsBody(rectangleOf: wallTexture.size())
+            upper.physicsBody?.categoryBitMask = self.wallCategory
             
             
             upper.physicsBody?.isDynamic = false
